@@ -1,3 +1,3 @@
 def call(){
-  echo "Hello"
+  echo "Shared Library function"
 }
