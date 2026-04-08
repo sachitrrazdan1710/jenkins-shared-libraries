@@ -2,6 +2,7 @@ def call() {
     sh """
         trivy fs . \
         --severity HIGH,CRITICAL \
-        --cache-dir /tmp/trivy-cache
+        --cache-dir /tmp/trivy-cache \
+         --skip-db-update
     """
 }
