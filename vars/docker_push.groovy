@@ -12,9 +12,16 @@ def call(Map config = [:]) {
     )]) {
         sh """
             echo "\$DOCKER_PASSWORD" | docker login -u "\$DOCKER_USERNAME" --password-stdin
-            docker tag ${imageName}:${imageTag} ${imageName}:latest
+            
             docker push ${imageName}:${imageTag}
-            docker push ${imageName}:latest
         """
+
+        // Only tag latest if NOT already latest
+        if (imageTag != 'latest') {
+            sh """
+                docker tag ${imageName}:${imageTag} ${imageName}:latest
+                docker push ${imageName}:latest
+            """
+        }
     }
 }
